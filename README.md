@@ -8,13 +8,13 @@ O projeto tem como objetivo implementar um **processo de ETL (Extract, Transform
 
 # 👥 Integrantes do Grupo
 
-- **Integrante 1** – Gestão de Repositório  
-- **Integrante 2** – Engenharia de Dados (Extração)  
-- **Integrante 3** – Análise de Dados (Transformação com Pandas)  
-- **Integrante 4** – Limpeza e Padronização de Dados  
-- **Integrante 5** – Desenvolvimento do Dashboard (Layout Streamlit)  
-- **Integrante 6** – Desenvolvimento do Dashboard (Visualizações)  
-- **Integrante 7** – Documentação e Qualidade (QA)
+- **THIAGO SILVA ROSA** – Gestão de Repositório  
+- **JANAINA FIGUEIREDO DA SILVA** – Engenharia de Dados (Extração)  
+- **MARIA ELAYNE SILVA DE ALMEIDA** – Análise de Dados (Transformação com Pandas)  
+- **YURI DA SILVA CAMARGO** – Limpeza e Padronização de Dados  
+- **IAN GIL BARDDAL** – Desenvolvimento do Dashboard (Layout Streamlit)  
+- **GABRIELLI MONTEIRO DE LIMA /THIAGO SILVA ROSA** – Desenvolvimento do Dashboard (Visualizações)  
+- **WILLIAM YURIO PAVANELLO SOKAME** – Documentação e Qualidade (QA)
 
 ---
 
@@ -101,9 +101,9 @@ O dashboard será desenvolvido utilizando **Streamlit** e apresentará visualiza
 ### Visualizações planejadas
 
 - **Gráfico de pizza** – Distribuição dos tipos de plano  
-- **Gráfico de barras** – Relação entre idade e horas assistidas  
-- **Filtros interativos** – Tipo de plano e data de último acesso
-
+- **Gráfico de barras** – Gêneros mais assistidos
+- **Filtros interativos** – País e Gênero
+- **Matriz** - Paises com mais horas de tela e Top idades com mais assinaturas
 ---
 
 # 📅 Cronograma de Desenvolvimento
