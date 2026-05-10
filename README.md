@@ -37,7 +37,7 @@ Contém a aplicação desenvolvida com Streamlit para visualização dos dados.
 Fonte: Kaggle  
 
 Dataset utilizado:  
-https://www.kaggle.com/datasets/shivamb/netflix-shows
+https://www.kaggle.com/datasets/smayanj/netflix-users-database/data
 
 ### Descrição
 
