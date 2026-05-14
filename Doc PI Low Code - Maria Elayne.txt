@@ -1,0 +1,343 @@
+
+
+
+
+
+# Documentação do Projeto – Análise de Dados com Pandas
+
+## Objetivo do Projeto
+
+Este projeto teve como objetivo realizar a transformação e análise de dados utilizando a biblioteca Pandas em Python. Durante o processo foram feitas etapas de importação, inspeção, limpeza, preparação e análise exploratória dos dados.
+
+---
+
+# 1. Importação das Bibliotecas
+
+Primeiramente foram importadas as bibliotecas necessárias para o desenvolvimento da análise:
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
+### Bibliotecas utilizadas
+
+* **Pandas (`pd`)**: utilizada para manipulação, tratamento e análise de dados.
+* **Matplotlib (`plt`)**: utilizada para criação de gráficos e visualizações.
+
+---
+
+# 2. Carregamento da Base de Dados
+
+A base de dados foi carregada utilizando o comando:
+
+```python
+df = pd.read_csv("base_original.csv")
+```
+
+### Objetivo desta etapa
+
+* Ler o arquivo CSV.
+* Transformar os dados em um DataFrame do Pandas.
+* Permitir a manipulação estruturada das informações.
+
+---
+
+# 3. Visualização Inicial dos Dados
+
+Foi utilizado o comando:
+
+```python
+df.head()
+```
+
+### Objetivo
+
+Visualizar as cinco primeiras linhas da base para:
+
+* Conferir se o arquivo foi carregado corretamente.
+* Identificar colunas existentes.
+* Observar o formato inicial dos dados.
+
+---
+
+# 4. Verificação da Estrutura da Base
+
+Foi utilizado:
+
+```python
+df.info()
+```
+
+### Objetivo
+
+Analisar:
+
+* Quantidade de linhas e colunas.
+* Tipos de dados de cada coluna.
+* Existência de valores nulos.
+* Consumo de memória.
+
+Essa etapa foi importante para entender a estrutura da base antes do tratamento dos dados.
+
+---
+
+# 5. Preparação dos Dados
+
+## 5.1 Verificação de Dados Duplicados
+
+Foi utilizado:
+
+```python
+df.duplicated().sum()
+```
+
+### Objetivo
+
+Verificar quantos registros duplicados existiam na base de dados.
+
+Essa análise ajuda a identificar possíveis inconsistências que podem afetar os resultados.
+
+
+---
+
+## 5.3 Criação da Faixa Etária
+
+Foi criada uma função personalizada:
+
+```python
+def faixa_etaria(idade):
+    if idade < 18:
+        return "Menor de idade"
+    elif idade < 30:
+        return "Jovem"
+    elif idade < 60:
+        return "Adulto"
+    else:
+        return "Senior"
+```
+
+### Objetivo
+
+Classificar os usuários em categorias de idade.
+
+### Categorias criadas
+
+| Faixa          | Condição                    |
+| -------------- | --------------------------- |
+| Menor de idade | idade menor que 18          |
+| Jovem          | idade entre 18 e 29         |
+| Adulto         | idade entre 30 e 59         |
+| Senior         | idade igual ou maior que 60 |
+
+Essa categorização facilitou análises segmentadas.
+
+---
+
+# 6. Análise da Faixa Etária
+
+## 6.1 Contagem das Categorias
+
+Foi utilizado:
+
+```python
+df["Faixa_Etaria"].value_counts()
+```
+
+### Objetivo
+
+Contar quantos usuários existem em cada faixa etária.
+
+Essa análise ajuda a identificar o perfil predominante dos usuários.
+
+---
+
+## 6.2 Verificação de Valores Nulos
+
+Foi utilizado:
+
+```python
+df["Faixa_Etaria"].isnull().sum()
+```
+
+### Objetivo
+
+Verificar se existem registros sem classificação de faixa etária.
+
+Isso garante maior qualidade nos dados analisados.
+
+---
+
+# 7. Criação de Tabelas Agregadas
+
+## 7.1 Quantidade de Usuários por País
+
+Foi criada a tabela:
+
+```python
+df_pais = df["Country"].value_counts().reset_index()
+df_pais.columns = ["Country", "Quantidade"]
+```
+
+### Objetivo
+
+Agrupar os dados por país e contar quantos usuários existem em cada localidade.
+
+### Resultado esperado
+
+Uma tabela contendo:
+
+| País   | Quantidade |
+| ------ | ---------- |
+| Brasil | X          |
+| EUA    | X          |
+| Canadá | X          |
+
+---
+
+## 7.2 Quantidade por Faixa Etária
+
+Foi utilizado:
+
+```python
+df_faixa = df.groupby("Faixa_Etaria").size().reset_index(name="Quantidade")
+```
+
+### Objetivo
+
+Agrupar os usuários por faixa etária e contabilizar a quantidade em cada categoria.
+
+---
+
+## 7.3 Quantidade por Gênero Favorito
+
+Foi criada a tabela:
+
+```python
+df_genero = df["Favorite_Genre"].value_counts().reset_index()
+df_genero.columns = ["Favorite_Genre", "Quantidade"]
+```
+
+### Objetivo
+
+Identificar os gêneros favoritos mais populares entre os usuários.
+
+---
+
+# 8. Cruzamento de Variáveis
+
+## 8.1 Faixa Etária x Gênero Favorito
+
+Foi utilizado:
+
+```python
+df_faixa_genero = df.groupby(["Faixa_Etaria", "Favorite_Genre"]).size().reset_index(name="Quantidade")
+```
+
+### Objetivo
+
+Cruzar as informações de faixa etária com gênero favorito.
+
+### Finalidade
+
+* Identificar preferências por idade.
+* Comparar comportamentos entre grupos.
+* Descobrir padrões de consumo.
+
+---
+
+## 8.2 País x Faixa Etária
+
+Foi utilizado:
+
+```python
+df_pais_faixa = df.groupby(["Country", "Faixa_Etaria"]).size().reset_index(name="Quantidade")
+```
+
+### Objetivo
+
+Analisar a distribuição das faixas etárias em cada país.
+
+### Possíveis análises
+
+* Países com maior quantidade de jovens.
+* Distribuição de adultos e seniors.
+* Comparações demográficas.
+
+---
+
+# 9. Estatísticas Gerais da Base
+
+## 9.1 Total de Registros
+
+Foi utilizado:
+
+```python
+total_registros = df.shape[0]
+```
+
+### Objetivo
+
+Identificar o número total de linhas da base de dados.
+
+---
+
+## 9.2 Quantidade de Países
+
+Foi utilizado:
+
+```python
+total_paises = df["Country"].nunique()
+```
+
+### Objetivo
+
+Contar quantos países únicos existem na base.
+
+---
+
+## 9.3 Faixa Etária Mais Comum
+
+Foi utilizado:
+
+```python
+faixa_mais_comum = df["Faixa_Etaria"].mode()[0]
+```
+
+### Objetivo
+
+Identificar qual faixa etária aparece com maior frequência.
+
+---
+
+# 10. Criação do Resumo Geral
+
+Foi criado um dicionário com as principais métricas:
+
+```python
+resumo = {
+    "total_registros": df.shape[0],
+    "total_paises": df["Country"].nunique(),
+    "faixa_mais_comum": df["Faixa_Etaria"].mode()[0]
+}
+```
+
+### Objetivo
+
+Centralizar informações importantes da análise em uma única estrutura.
+
+---
+
+# Conclusão
+
+Durante este projeto foram aplicados diversos conceitos fundamentais de análise de dados utilizando Pandas, incluindo:
+
+* Importação de dados.
+* Exploração inicial da base.
+* Preparação dos dados.
+* Criação de categorias.
+* Agrupamentos.
+* Cruzamento de variáveis.
+* Geração de estatísticas.
+
+O projeto permitiu desenvolver habilidades importantes de manipulação de dados e análise exploratória utilizando Python.
